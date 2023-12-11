@@ -20,7 +20,7 @@ export default function Home() {
         "postgres_changes",
         { event: "*", schema: "public", table: "Sticky" },
         (payload) => {
-          console.log("Change received!", payload);
+          // console.log("Change received!", payload);
           fetch();
         }
       )
@@ -56,9 +56,9 @@ export default function Home() {
               .update({ archived: true })
               .eq("id", item.id)
               .select();
-            console.log(`Item with ID ${item.id} archived successfully.`);
+            // console.log(`Item with ID ${item.id} archived successfully.`);
           } catch (error) {
-            console.error(`Error archiving item with ID ${item.id}:`, error);
+            // console.error(`Error archiving item with ID ${item.id}:`, error);
           }
         }
 

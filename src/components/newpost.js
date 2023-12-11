@@ -14,15 +14,14 @@ export const NewPost = () => {
           likes: 0,
         },
       ]);
-      console.log(data, error);
+      //   console.log(data, error);
     } catch (error) {
-      console.log(error);
+      //   console.log(error);
     }
   };
   return (
     <div>
       <div className="heading text-center font-bold text-2xl m-5">New Post</div>
-
       <div className="editor flex flex-col p-4 max-w-2xl rounded-md">
         <input
           className="title border p-2 mb-4"

@@ -77,7 +77,7 @@ export const Nav = () => {
         </details>
       </div>
       <div className="navbar-center">
-        <a className="btn btn-ghost text-xl">Sticky!</a>
+        <a className="btn btn-ghost text-xl">Stick Up!</a>
       </div>
       <div className="navbar-end">
         <button className="btn btn-ghost btn-circle">

@@ -18,7 +18,7 @@ export const UserPost = (props) => {
     } else {
       return data;
     }
-    console.log(data);
+    // console.log(data);
   };
 
   const handleLike = async (id) => {
@@ -32,9 +32,9 @@ export const UserPost = (props) => {
       .eq("id", id)
       .select();
     if (error) {
-      console.log(error);
+      //   console.log(error);
     } else {
-      console.log(data);
+      //   console.log(data);
     }
     setLikes(0);
   };
@@ -50,9 +50,9 @@ export const UserPost = (props) => {
       .eq("id", id)
       .select();
     if (error) {
-      console.log(error);
+      //   console.log(error);
     } else {
-      console.log(data);
+      //   console.log(data);
     }
     setLikes(0);
   };

@@ -26,9 +26,9 @@ export default function MCE() {
       />
 
       <div className="buttons flex pt-5">
-        <div className="btn border p-1 px-4 font-semibold cursor-pointer text-gray-500 ml-auto">
+        {/* <div className="btn border p-1 px-4 font-semibold cursor-pointer text-gray-500 ml-auto">
           Cancel
-        </div>
+        </div> */}
         <button className="btn btn-outline btn-success  onClick={log} ">
           Post
         </button>
