@@ -12,6 +12,7 @@ import Counter from "@/components/Loaders/counter";
 import { Skeleton } from "react-daisyui";
 import { Loader } from "@/components/Loaders/loader";
 import NoPost from "@/components/Contents/noPost";
+import { invalid } from "moment";
 export default function Home() {
   const [fetchData, setFetchData] = useState(null);
   const { formatDate } = useDateValidation();
@@ -37,7 +38,7 @@ export default function Home() {
         .eq("archived", false);
 
       if (data) {
-        console.log("sotrrrt");
+        // Sorting and Data Manipulation
         const responsedata = data
           .filter((item) => formatDate(item.created_at) !== "Invalid")
           .map((item) => ({
@@ -53,7 +54,7 @@ export default function Home() {
           (item) => formatDate(item.created_at) === "Invalid"
         );
 
-        for (const item of invalidData) {
+        invalidData.map(async (item) => {
           try {
             await supabase
               .from("Sticky")
@@ -64,8 +65,7 @@ export default function Home() {
           } catch (error) {
             // console.error(`Error archiving item with ID ${item.id}:`, error);
           }
-        }
-
+        });
         setFetchData(responsedata);
       }
     };

@@ -3,12 +3,15 @@ import React from "react";
 import { Skeleton } from "react-daisyui";
 export const Loader = () => {
   return (
-    <main className="h-full flex-wrap space-4 items-center justify-center">
-      {Array.from({ length: 1 }, (i) => (
-        <div className=" space-4 items-center justify-center" key={i}>
-          <Skeleton className="h-32 w-full p-5"></Skeleton>
+    <div className="flex-wrap flex-col  items-center justify-center">
+      {Array.from({ length: 2 }, (i) => (
+        <div
+          className=" flex  space-4 items-center justify-center flex-row "
+          key={i}
+        >
+          <Skeleton className="h-32 w-full p-5 m-10"></Skeleton>
         </div>
       ))}
-    </main>
+    </div>
   );
 };
