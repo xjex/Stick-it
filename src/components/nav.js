@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { NewPost } from "./newpost";
+import { NewPost } from "./Contents/newpost";
 import MCE from "./tiny-editor";
 
 export const Nav = () => {
@@ -51,8 +51,8 @@ export const Nav = () => {
                 type="radio"
                 name="theme-buttons"
                 className="btn theme-controller join-item"
-                aria-label="Cyberpunk"
-                value="cyberpunk"
+                aria-label="Nord"
+                value="nord"
               />
             </li>
             <li>
@@ -60,8 +60,8 @@ export const Nav = () => {
                 type="radio"
                 name="theme-buttons"
                 className="btn theme-controller join-item"
-                aria-label="Valentine"
-                value="valentine"
+                aria-label="Coffee"
+                value="coffee"
               />
             </li>
             <li>

@@ -1,60 +1,71 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import supabase from "./supabaseClient";
+import supabase from "../supabaseClient";
 import { useRouter } from "next/navigation";
+import Counter from "../Loaders/counter";
+import { useDateValidation } from "@/components/hooks/useDateValidation";
+import NoPost from "./noPost";
 export const UserPost = (props) => {
   const posts = props.data;
+  const { hr, mn, sec } = useDateValidation();
   const router = useRouter();
   const [likes, setLikes] = useState(0);
-  useEffect(() => {}, [posts]);
+  const [isAllowVote, setIsAllowVote] = useState(false);
+  const [post_id, setId] = useState(null);
+  useEffect(() => {
+    if (post_id === null) return;
+    else {
+      console.log("useeffect triggered");
+    }
+  }, [post_id]);
 
-  const getLikes = async (id) => {
+  //vote only once
+
+  const getLikes = async () => {
     const { data, error } = await supabase
       .from("Sticky")
       .select("likes")
-      .eq("id", id);
-    if (error) {
-      console.log(error);
+      .eq("id", post_id);
+    if (data) {
+      setLikes(data[0].likes);
     } else {
-      return data;
+      console.log(error);
     }
-    // console.log(data);
   };
 
   const handleLike = async (id) => {
-    getLikes(id).then((data) => {
-      setLikes(data[0].likes);
-    });
-
+    setId(id);
+    await getLikes();
     const { data, error } = await supabase
       .from("Sticky")
       .update({ likes: likes + 1 })
-      .eq("id", id)
-      .select();
+      .eq("id", id);
+
     if (error) {
-      //   console.log(error);
+      console.log(error);
     } else {
-      //   console.log(data);
+      setLikes(likes + 1);
+      setIsAllowVote(true);
     }
-    setLikes(0);
+    // console.log(postlikes);
   };
 
   const handleDislike = async (id) => {
-    getLikes(id).then((data) => {
-      setLikes(data[0].likes);
-    });
-
+    console.log(id);
+    setId(id);
+    await getLikes();
     const { data, error } = await supabase
       .from("Sticky")
       .update({ likes: likes - 1 })
-      .eq("id", id)
-      .select();
+      .eq("id", id);
+
     if (error) {
-      //   console.log(error);
+      console.log(error);
     } else {
-      //   console.log(data);
+      setLikes(likes - 1);
+      setIsAllowVote(true);
     }
-    setLikes(0);
+    console.log(likes);
   };
 
   return (
@@ -68,6 +79,7 @@ export const UserPost = (props) => {
             >
               <div className="card-body">
                 <div className="flex justify-between">
+                  {/*  */}
                   <span className="badge ">{post.date}</span>
                   <span className="badge badge-outline">{post.likes} like</span>
                 </div>

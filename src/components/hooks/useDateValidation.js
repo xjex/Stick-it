@@ -1,4 +1,15 @@
+import { useState, useEffect } from "react";
+
 export const useDateValidation = () => {
+  const [mn, setMinutes] = useState(0);
+  const [hr, setHours] = useState(0);
+  const [sec, setSec] = useState(0);
+
+  const setStates = (mn, hr, sec) => {
+    setMinutes(mn);
+    setHours(hr);
+    setSec(sec);
+  };
   const formatDate = (date, timeZone = "UTC") => {
     const acceptedDate = new Date(date);
     const currentDate = new Date();
@@ -21,6 +32,11 @@ export const useDateValidation = () => {
     const minutes = Math.floor(seconds / 60);
     const hours = Math.floor(minutes / 60);
 
+    const t_hours = Math.floor(seconds / 3600);
+    const t_minutes = Math.floor((seconds % 3600) / 60);
+    const t_seconds = seconds % 60;
+
+    setStates(t_minutes, t_hours, t_seconds);
     if (seconds <= 0) {
       return "Just now";
     } else if (seconds < 60) {
@@ -36,5 +52,11 @@ export const useDateValidation = () => {
 
   return {
     formatDate,
+    hr,
+    mn,
+    sec,
+    setHours,
+    setMinutes,
+    setSec,
   };
 };

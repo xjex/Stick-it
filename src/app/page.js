@@ -1,13 +1,17 @@
 "use client";
 import Image from "next/image";
 import { Nav } from "../components/nav";
-import { NewPost } from "@/components/newpost";
+import { NewPost } from "@/components/Contents/newpost";
 import MCE from "@/components/tiny-editor";
-import { UserPost } from "@/components/Post";
+import { UserPost } from "@/components/Contents/Post";
 import supabase from "@/components/supabaseClient";
 import React, { useEffect, useState } from "react";
-import { useDateValidation } from "./hooks/useDateValidation";
+import { useDateValidation } from "../components/hooks/useDateValidation";
 import { useRouter } from "next/navigation";
+import Counter from "@/components/Loaders/counter";
+import { Skeleton } from "react-daisyui";
+import { Loader } from "@/components/Loaders/loader";
+import NoPost from "@/components/Contents/noPost";
 export default function Home() {
   const [fetchData, setFetchData] = useState(null);
   const { formatDate } = useDateValidation();
@@ -70,13 +74,14 @@ export default function Home() {
 
     //sort fetchdata by ID
   }, []);
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-4">
       <div>
         <div className="text-center font-bold text-3xl p-10">
-          24 hour posting
+          Everything will be deleted after 24 hours...
         </div>
-        <UserPost data={fetchData} />
+        {(fetchData && <UserPost data={fetchData} />) || <Loader />}
       </div>
     </main>
   );

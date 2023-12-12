@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import supabase from "./supabaseClient";
+import supabase from "../supabaseClient";
 export const NewPost = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -21,10 +21,12 @@ export const NewPost = () => {
   };
   return (
     <div>
-      <div className="heading text-center font-bold text-2xl m-5">New Post</div>
+      <div className="heading text-center font-bold text-2xl m-5 ">
+        New Post
+      </div>
       <div className="editor flex flex-col p-4 max-w-2xl rounded-md">
         <input
-          className="title border p-2 mb-4"
+          className="input input-bordered input-primary border p-2 mb-4"
           placeholder="Title"
           spellCheck="false"
           type="text"
@@ -33,7 +35,7 @@ export const NewPost = () => {
         />
 
         <textarea
-          className="description sec p-3 h-60 borderoutline-none"
+          className="textarea textarea-primary sec p-3 h-60 borderoutline-none"
           spellCheck="false"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
