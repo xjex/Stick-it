@@ -24,7 +24,7 @@ const page = () => {
     <div className="flex flex-col items-center h-screen justify-center">
       {/* create signup */}
 
-      <div className="editor flex flex-col p-4 max-w-2xl bg-inherit shadow-md rounded-md">
+      <div className=" flex flex-col p-4 max-w-2xl shadow-md rounded-md">
         <input
           className="input input-bordered input-primary border p-2 mb-4"
           placeholder="Email"

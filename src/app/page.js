@@ -47,6 +47,7 @@ export default function Home() {
             content: item.content,
             likes: item.likes,
             date: formatDate(item.created_at),
+            img_url: item.img_url,
           })) //sortby id here
           .sort((a, b) => b.id - a.id);
 
@@ -54,6 +55,7 @@ export default function Home() {
           (item) => formatDate(item.created_at) === "Invalid"
         );
 
+        //delete invalid data
         invalidData.map(async (item) => {
           try {
             await supabase

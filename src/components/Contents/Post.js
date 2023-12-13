@@ -5,12 +5,13 @@ import { useRouter } from "next/navigation";
 import Counter from "../Loaders/counter";
 import { useDateValidation } from "@/components/hooks/useDateValidation";
 import NoPost from "./noPost";
+import { BLoader } from "../Loaders/button_loader";
 export const UserPost = (props) => {
   const posts = props.data;
   const { hr, mn, sec } = useDateValidation();
   const router = useRouter();
   const [likes, setLikes] = useState(null);
-
+  const [loading, setLoading] = useState(false);
   const handleLike = async (id, n_likes) => {
     const { data, error } = await supabase
       .from("Sticky")
@@ -18,7 +19,7 @@ export const UserPost = (props) => {
       .eq("id", id);
 
     if (error) {
-      console.log(error);
+      //console.log(error);
     } else {
       setLikes(likes + 1);
     }
@@ -31,11 +32,10 @@ export const UserPost = (props) => {
       .eq("id", id);
 
     if (error) {
-      console.log(error);
+      //console.log(error);
     } else {
       setLikes(likes - 1);
     }
-    console.log(likes);
   };
 
   return (
@@ -52,10 +52,10 @@ export const UserPost = (props) => {
                   <div className="flex justify-between">
                     {/*  */}
                     <span className="badge ">{post.date}</span>
-                    <span className="badge badge-outline">
-                      {post.likes} like
-                    </span>
+                    <span className="badge badge-outline">{post.likes} 🧡</span>
                   </div>
+
+                  <img className="rounded-xl" src={post.img_url} alt="" />
                   <h2 className="card-title">{post.title}</h2>
                   <p>{post.content}</p>
 
@@ -65,7 +65,7 @@ export const UserPost = (props) => {
                         className="btn"
                         onClick={(e) => handleLike(post.id, post.likes)}
                       >
-                        👍
+                        {(loading && <BLoader />) || "🧡"}
                       </button>
                     </div>
                     <div className="">
@@ -73,7 +73,7 @@ export const UserPost = (props) => {
                         className="btn"
                         onClick={(e) => handleDislike(post.id, post.likes)}
                       >
-                        💔
+                        {(loading && <BLoader />) || "💔"}
                       </button>
                     </div>
                   </div>

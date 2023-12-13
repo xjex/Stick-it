@@ -3,12 +3,19 @@
 import React from "react";
 import { NewPost } from "./Contents/newpost";
 import MCE from "./tiny-editor";
+import { useState } from "react";
 
 export const Nav = () => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const closeImg = () => {
+    setIsExpanded(false);
+  };
+
   return (
-    <div className="navbar bg-base-100 bg-blue-500 text-white">
-      <div className="navbar-start">
-        <details className="dropdown">
+    <div className="navbar shadow-md">
+      <div className="navbar-start text-white">
+        <details className="dropdown " role="button">
           {/* <summary className="m-1 btn">open or close</summary> */}
           <summary tabIndex="0" role="button" className="btn btn-ghost ">
             <svg
@@ -77,10 +84,10 @@ export const Nav = () => {
         </details>
       </div>
       <div className="navbar-center">
-        <a className="btn btn-ghost text-xl">Stick Up!</a>
+        <a className="btn btn-ghost text-xl text-white">Stick Up!</a>
       </div>
       <div className="navbar-end">
-        <button className="btn btn-ghost btn-circle">
+        <button className="btn btn-ghost btn-circle  text-white">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-5 w-5"
@@ -118,21 +125,31 @@ export const Nav = () => {
 
         {/* modal */}
         <button
-          className="btn btn-ghost btn-circle"
-          onClick={() => document.getElementById("my_modal_3").showModal()}
+          className="btn btn-ghost btn-circle  text-white"
+          onClick={() => document.getElementById("my_modal_2").showModal()}
         >
           New Post
         </button>
 
-        <dialog id="my_modal_3" className="modal">
+        <dialog id="my_modal_2" className="modal">
           <div className="modal-box">
             <form method="dialog">
               {/* if there is a button in form, it will close the modal */}
-              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-                ✕
-              </button>
+              {!isExpanded ? (
+                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                  ✕
+                </button>
+              ) : (
+                <span
+                  className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                  onClick={closeImg}
+                >
+                  ✕
+                </span>
+              )}
+
               {/* <MCE /> */}
-              <NewPost />
+              <NewPost showImage={isExpanded} setShowImage={setIsExpanded} />
             </form>
           </div>
         </dialog>
