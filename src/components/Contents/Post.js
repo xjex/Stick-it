@@ -45,19 +45,29 @@ export const UserPost = (props) => {
           posts.map((post) => {
             return (
               <div
-                className="card w-96 bg-primary text-primary-content m-3"
+                className="card w-96 bg-primary text-primary-content h- max-w-250 m-3"
                 key={post.id}
               >
-                <div className="card-body">
+                <div className="card-body ">
                   <div className="flex justify-between">
                     {/*  */}
                     <span className="badge ">{post.date}</span>
                     <span className="badge badge-outline">{post.likes} 🧡</span>
                   </div>
+                  {post.img_url ? (
+                    <img
+                      className=" aspect-square object-center object-contain"
+                      src={post.img_url}
+                      alt=""
+                    />
+                  ) : (
+                    <div></div>
+                  )}
 
-                  <img className="rounded-xl" src={post.img_url} alt="" />
                   <h2 className="card-title">{post.title}</h2>
-                  <p>{post.content}</p>
+                  <p className="text-ellipsis overflow-hidden max-w-300 max-h-20">
+                    {post.content}
+                  </p>
 
                   <div className="card-actions  justify-end">
                     <div className="">

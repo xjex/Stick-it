@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import supabase from "../supabaseClient";
 export const NewPost = (props) => {
   const isExpanded = props.showImage;
@@ -10,7 +10,24 @@ export const NewPost = (props) => {
   const [loading, setLoading] = useState(false);
   const [getId, setGetId] = useState("");
   const [File, setFile] = useState({});
+  const [textCount, setTextCount] = useState(0);
 
+  useEffect(() => {
+    const count = description.length;
+    setTextCount(count);
+  }, [description]);
+
+  const textColor = (num) => {
+    if (num == 150) {
+      return "text-red-500 ";
+    } else if (num >= 50 && num <= 99) {
+      return "text-yellow-500";
+    } else if (num >= 100 && num <= 149) {
+      return "text-orange-500";
+    } else {
+      return "text-green-500";
+    }
+  };
   const submitPost = async () => {
     try {
       const { data, error } = await supabase
@@ -53,19 +70,19 @@ export const NewPost = (props) => {
               .from("Sticky")
               .update({ img_url: dt })
               .eq("id", returningID);
-            console.log(data, error);
+            //console.log(data, error);
           } catch (error) {
-            console.log(error);
+            //console.log(error);
           }
 
-          console.log(data.publicUrl);
+          //console.log(data.publicUrl);
         } catch (error) {
-          console.log(error);
+          //console.log(error);
         }
 
-        console.log(data, error);
+        //console.log(data, error);
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
 
       //clear input
@@ -83,14 +100,18 @@ export const NewPost = (props) => {
     const filePath = `${fileName}`;
 
     setFile(file);
-    console.log(e.target.files[0]);
-    console.log(File);
+    //console.log(e.target.files[0]);
+    //console.log(File);
     setImage(URL.createObjectURL(e.target.files[0]));
-    console.log(filePath, file, fileExt, fileName);
+    //console.log(filePath, file, fileExt, fileName);
     // const { data, error } = await supabase.storage
     //   .from("sticky")
     //   .upload(filePath, file);
-    // console.log(data, error);
+    // //console.log(data, error);
+  };
+
+  const countText = (e) => {
+    //console.log(count);
   };
   return (
     <div>
@@ -122,14 +143,19 @@ export const NewPost = (props) => {
             className="textarea textarea-primary sec p-3 h-60 borderoutline-none"
             spellCheck="false"
             value={description}
+            maxlength="150"
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Describe everything about this post here"
           ></textarea>
 
-          <div className="icons flex m-2">
-            <label for="upload-photo">
+          <div className="icons flex m-2 ">
+            <label
+              for="upload-photo"
+              className="tooltip  tooltip-right tooltip-primary"
+              data-tip="Upload Image"
+            >
               <svg
-                className="mr-2 cursor-pointer hover:-translate-y-1 transition border rounded-full p-1 h-7"
+                className="mr-2 cursor-pointer transition border rounded-full p-1 h-7"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -151,23 +177,31 @@ export const NewPost = (props) => {
               className="hidden"
             />
 
-            <div className="count ml-auto text-xs font-semibold">0/300</div>
+            <div
+              className={`${textColor(
+                textCount
+              )}  count ml-auto text-xs font-semibold`}
+            >
+              {textCount}/150
+            </div>
           </div>
           {image && (
             <div className=" ">
-              <div className="text-center font-bold text-2xl m-5 ">Preview</div>
               <div className="flex justify-center">
                 {/* add x remove button */}
-                <div className="avatar indicator">
+                <div
+                  className="avatar indicator  tooltip  tooltip-top "
+                  data-tip="Click to Preview Image"
+                >
                   <span
-                    className="indicator-item badge badge-ghost hover:badge-secondary cursor-pointer"
+                    className=" indicator-item badge badge-ghost hover:badge-error cursor-pointer"
                     onClick={(x) => setImage("")}
                   >
-                    Remove
+                    ✕
                   </span>
-                  <div className="object-contains h-48 w-96   rounded-lg">
+                  <div className="object-contains object-top h-48 w-96   rounded-lg">
                     <img
-                      class="object-cover aspect-video w-full h-48 w-96"
+                      class="object-cover  w-full h-48 w-96"
                       src={image}
                       alt=""
                       onClick={(e) => setIsExpanded(true)}
@@ -178,9 +212,9 @@ export const NewPost = (props) => {
             </div>
           )}
 
-          <div className="">
+          <div className="flex justify-center items-center mt-2">
             <button
-              className="btn btn-outline btn-success full"
+              className="btn btn-wide btn-outline btn-primary full"
               onClick={submitPost}
             >
               Post
