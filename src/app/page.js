@@ -9,6 +9,11 @@ import { useRouter } from "next/navigation";
 import { Helmet } from "react-helmet";
 import { Loader } from "@/components/Loaders/loader";
 
+import ShowPost from "@/components/Contents/showPost";
+
+// redux
+import { Provider } from "react-redux";
+import store from "@/components/redux/store";
 export default function Home() {
   const [fetchData, setFetchData] = useState(null);
   const { formatDate } = useDateValidation();
@@ -21,7 +26,7 @@ export default function Home() {
         "postgres_changes",
         { event: "*", schema: "public", table: "Sticky" },
         (payload) => {
-          // console.log("Change received!", payload);
+          console.log("Change received!", payload);
           fetch();
         }
       )
@@ -75,27 +80,15 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-4">
-      <Helmet>
-        <title>Stick-up</title>
-        <meta name="description" content="A freedom wall for everyone." />
-        <meta property="og:title" content="Stick-up" />
-        <meta
-          property="og:description"
-          content="A freedom wall for everyone."
-        />
-        <meta property="og:image" content="/og.png" />
-        <meta property="og:url" content="https://stick-up.vercel.app/" />
-        {/* <meta name="twitter:title" content="Stick-up" />
-        <meta name="twitter:description" content="A freedom wall for everyone." />
-        <meta name="twitter:image" content="/og.png" />
-        <meta name="twitter:card" content="summary_large_image" /> */}
-      </Helmet>
-      <div>
-        <div className="text-center font-bold text-3xl p-10">
-          Everything will be deleted after 24 hours...
+      <Provider store={store}>
+        <div>
+          <div className="text-center font-bold text-3xl p-10">
+            Everything will be deleted after 24 hours...
+          </div>
+          {(fetchData && <UserPost data={fetchData} />) || <Loader />}
         </div>
-        {(fetchData && <UserPost data={fetchData} />) || <Loader />}
-      </div>
+        <ShowPost />
+      </Provider>
     </main>
   );
 }

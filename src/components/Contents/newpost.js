@@ -135,14 +135,14 @@ export const NewPost = (props) => {
             className="textarea textarea-primary sec p-3 h-60 borderoutline-none"
             spellCheck="false"
             value={description}
-            maxlength="150"
+            maxLength="150"
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Describe everything about this post here"
           ></textarea>
 
           <div className="icons flex m-2  ">
             <label
-              for="upload-photo"
+              htmlFor="upload-photo"
               className="tooltip  tooltip-right tooltip-primary  "
               data-tip="Upload Image"
             >
