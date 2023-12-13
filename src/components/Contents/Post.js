@@ -45,7 +45,7 @@ export const UserPost = (props) => {
           posts.map((post) => {
             return (
               <div
-                className="card  hover:scale-105 transition ease-in w-96 bg-primary text-primary-content h- max-w-250 m-3"
+                className="card  xl:hover:scale-105 w-96 bg-primary text-primary-content h- max-w-250 m-3  xl:transition xl:ease-in md:hover:scale-105 lg:transition lg:ease-in "
                 key={post.id}
               >
                 <div className="card-body ">
