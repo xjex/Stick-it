@@ -98,16 +98,8 @@ export const NewPost = (props) => {
     const fileExt = file.name.split(".").pop();
     const fileName = `${Math.random()}.${fileExt}`;
     const filePath = `${fileName}`;
-
     setFile(file);
-    //console.log(e.target.files[0]);
-    //console.log(File);
     setImage(URL.createObjectURL(e.target.files[0]));
-    //console.log(filePath, file, fileExt, fileName);
-    // const { data, error } = await supabase.storage
-    //   .from("sticky")
-    //   .upload(filePath, file);
-    // //console.log(data, error);
   };
 
   const countText = (e) => {
@@ -148,14 +140,14 @@ export const NewPost = (props) => {
             placeholder="Describe everything about this post here"
           ></textarea>
 
-          <div className="icons flex m-2 ">
+          <div className="icons flex m-2  ">
             <label
               for="upload-photo"
-              className="tooltip  tooltip-right tooltip-primary"
+              className="tooltip  tooltip-right tooltip-primary  "
               data-tip="Upload Image"
             >
               <svg
-                className="mr-2 cursor-pointer transition border rounded-full p-1 h-7"
+                className="mr-2 hover:scale-110 cursor-pointer transition border rounded-full p-1 h-7"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -201,7 +193,7 @@ export const NewPost = (props) => {
                   </span>
                   <div className="object-contains object-top h-48 w-96   rounded-lg">
                     <img
-                      class="object-cover  w-full h-48 w-96"
+                      class="object-cover h-48 w-96"
                       src={image}
                       alt=""
                       onClick={(e) => setIsExpanded(true)}
