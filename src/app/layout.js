@@ -12,7 +12,7 @@ export const metadata = {
     "https://xleahmgrjfdmuxgfgcog.supabase.co/storage/v1/object/public/sticky/meta/Stickup.PNG?t=2023-12-14T08%3A39%3A26.489Z",
   url: "https://stick-up.vercel.app/",
   keywords:
-    "social media, sticky notes, stick-up, stick, up, stickup, stick-up!, stick-up!, stickup!, stick up, noteswall, wall, post, free, posting, freedom, freedom wall, freedomwall, freedom-wall, freedom_wall, freedomwall,",
+    "data posting,social media, sticky notes, stick-up, stick, up, stickup, stick-up!, stick-up!, stickup!, stick up, noteswall, wall, post, free, posting, freedom, freedom wall, freedomwall, freedom-wall, freedom_wall, freedomwall,",
 
   author: "Xavier Joseph Manaloto",
   robots: "index, follow",
