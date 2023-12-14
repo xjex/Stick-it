@@ -6,7 +6,7 @@ import supabase from "@/components/supabaseClient";
 import React, { useEffect, useState } from "react";
 import { useDateValidation } from "../components/hooks/useDateValidation";
 import { useRouter } from "next/navigation";
-import { Helmet } from "react-helmet";
+
 import { Loader } from "@/components/Loaders/loader";
 
 import ShowPost from "@/components/Contents/showPost";
@@ -18,7 +18,6 @@ import { SEO } from "@/components/seo/seo";
 export default function Home() {
   const [fetchData, setFetchData] = useState(null);
   const { formatDate } = useDateValidation();
-  const router = useRouter();
 
   useEffect(() => {
     supabase
