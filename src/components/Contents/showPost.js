@@ -1,10 +1,8 @@
 "use client";
 import React from "react";
-import { useModalShowPost } from "../hooks/Moda-ShowPost";
+
 import { useSelector } from "react-redux";
 const ShowPost = () => {
-  const { postData, test, setPostData, changeData } = useModalShowPost();
-
   const id = useSelector((state) => state.counter.id);
   const img = useSelector((state) => state.counter.image);
   const title = useSelector((state) => state.counter.title);

@@ -1,12 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import supabase from "../supabaseClient";
-import { useRouter } from "next/navigation";
-import Counter from "../Loaders/counter";
-import { useDateValidation } from "@/components/hooks/useDateValidation";
+
 import NoPost from "./noPost";
 import { BLoader } from "../Loaders/button_loader";
-import { useModalShowPost } from "../hooks/Moda-ShowPost";
+
 import { useSelector, useDispatch } from "react-redux";
 import {
   getPostData,
@@ -18,11 +16,9 @@ import {
 export const UserPost = (props) => {
   const posts = props.data;
 
-  const { setPostData, changeData } = useModalShowPost();
-
   const [likes, setLikes] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [selectedPost, setSelectedPost] = useState(null);
+
   const handleLike = async (id, n_likes) => {
     const { data, error } = await supabase
       .from("Sticky")
@@ -34,12 +30,6 @@ export const UserPost = (props) => {
     } else {
       setLikes(likes + 1);
     }
-  };
-
-  const showMore = (id, image, title, description) => {
-    setPostData({ id, image, title, description });
-    console.log(changeData(selectedPost));
-    document.getElementById("showModal").showModal();
   };
 
   const handleDislike = async (id, n_likes) => {
