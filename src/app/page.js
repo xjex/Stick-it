@@ -5,7 +5,6 @@ import { UserPost } from "@/components/Contents/Post";
 import supabase from "@/components/supabaseClient";
 import React, { useEffect, useState } from "react";
 import { useDateValidation } from "../components/hooks/useDateValidation";
-import { useRouter } from "next/navigation";
 
 import { Loader } from "@/components/Loaders/loader";
 
@@ -14,7 +13,7 @@ import ShowPost from "@/components/Contents/showPost";
 // redux
 import { Provider } from "react-redux";
 import store from "@/components/redux/store";
-import { SEO } from "@/components/seo/seo";
+
 export default function Home() {
   const [fetchData, setFetchData] = useState(null);
   const { formatDate } = useDateValidation();
@@ -80,7 +79,6 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-4">
-      <SEO />
       <Provider store={store}>
         <div>
           <div className="text-center font-bold text-3xl p-10">
