@@ -16,6 +16,15 @@ export const metadata = {
 
   author: "Xavier Joseph Manaloto",
   robots: "index, follow",
+  site_name: "Stick-up!",
+  og_title: "Home| Stick-up! ",
+  og_description:
+    "Stick-up! is a social media platform that allows users to post their thoughts and ideas in a sticky note format.",
+  og_image:
+    "https://xleahmgrjfdmuxgfgcog.supabase.co/storage/v1/object/public/sticky/meta/Stickup.PNG?t=2023-12-14T08%3A39%3A26.489Z",
+  og_url: "https://stick-up.vercel.app/",
+  og_type: "website",
+  og_site_name: "Stick-up!",
 };
 
 export default function RootLayout({ children }) {
