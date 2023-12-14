@@ -1,6 +1,6 @@
 import React from "react";
-
-export const seo = (props) => {
+import Head from "next/head";
+export const SEO = (props) => {
   // const title = props.title;
   // const description = props.description;
   // const image = props.image;
