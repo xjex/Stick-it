@@ -12,6 +12,7 @@ export const SEO = (props) => {
     <>
       <Head>
         <title>Home| Stick-up! </title>
+        <meta charSet="utf-8" />
         <meta
           name="description"
           content="Stick-up! is a social media platform that allows users to post their thoughts and ideas in a sticky note format."
